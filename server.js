@@ -18,17 +18,21 @@ app.use((req, res, next) => {
 const MongoClient = require("mongodb").MongoClient;
 let db;
 
-app.param('collectionName', (req, res, next, collectionName) => {
-  req.collection = db.collection(collectionName)
-  return next()
-})
+app.get("/collection/products", (req, res, next) => {
+  db.collection("products")
+    .find({})
+    .toArray((err, results) => {
+      if (err) return next(err);
+      res.send(results);
+    });
+});
 
-app.get('/collection/:collectionName', (req, res, next) => {
-  req.collection.find({}).toArray((e, results) => {
-      if (e) return next(e)
-      res.send(results)
-  })
-})
+app.post("/collection/orders", (req, res, next) => {
+  db.collection("orders")
+    .insertOne(req.body)
+    .then((result) => res.status(201).send(result))
+    .catch((error) => next(error));
+});
 
 MongoClient.connect(
   "mongodb+srv://sakinamirza:786572SfM@cluster0.cnzxt2r.mongodb.net/",
