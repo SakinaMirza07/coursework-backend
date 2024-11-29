@@ -33,6 +33,13 @@ app.post("/collection/orders", (req, res, next) => {
     .then((result) => res.status(201).send(result))
     .catch((error) => next(error));
 });
+const ObjectID = require("mongodb").ObjectID;
+
+app.put("/collection/products/:id", (req, res, next) => {
+  const activityId = req.params.id;
+  const vacancy = req.body.vacancy;
+});
+
 
 MongoClient.connect(
   "mongodb+srv://sakinamirza:786572SfM@cluster0.cnzxt2r.mongodb.net/",
