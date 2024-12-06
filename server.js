@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path");
 const app = express();
 
 app.use(express.json());
@@ -21,7 +22,7 @@ app.use((req, res, next) => {
   next(); // Proceed to the next middleware or route handler
 });
 // Serve static files (lesson images) from the 'public/images' folder
-app.use('/images', express.static("public/images"));
+app.use("/images", express.static(path.resolve(__dirname, "images")));
 
 app.use((req, res, next) => {
   const now = new Date().toISOString();
