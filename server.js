@@ -50,7 +50,6 @@ app.post("/collection/orders", (req, res, next) => {
 });
 
 const ObjectID = require("mongodb").ObjectID;
-
 app.put("/collection/products/:id", (req, res, next) => {
   const productId = req.params.id;
   const updatedData = req.body;
